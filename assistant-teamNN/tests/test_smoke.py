@@ -28,6 +28,29 @@ def test_office_lookup(office, room, hours):
     )
 
 
+def test_office_lookup_by_partial_name_suffix():
+    assert reply("affair") == (
+        "Student Affairs: room I.102, open Mon-Fri 08:00-16:00."
+    )
+
+
+def test_ambiguous():
+    assert reply("office") == (
+        "I don't know that yet. Try asking about an office, e.g. 'training office'."
+    )
+
+
+def test_help():
+    assert reply("hi") == "Hello! Ask me where an office is, or when it opens."
+    assert reply("help") == (
+        "I can tell you an office's room and opening hours. "
+        "Ask, for example, 'Where is the library?'"
+    )
+    assert reply("what is the meaning of life") == (
+        "I don't know that yet. Try asking about an office, e.g. 'training office'."
+    )
+
+
 def test_unknown():
     assert "don't know" in reply("what is the meaning of life")
 

@@ -13,6 +13,13 @@ def test_greeting():
     assert "Hello" in reply("hi")
 
 
+def test_help():
+    assert reply("help") == (
+        "I can tell you an office's room and opening hours. "
+        "Ask, for example, 'Where is the library?'"
+    )
+
+
 @pytest.mark.parametrize(
     ("office", "room", "hours"),
     [

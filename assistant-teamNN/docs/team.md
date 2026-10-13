@@ -8,7 +8,8 @@
 | Hiền Lương | `hienluong` | Assistant Core |
 | Quân | `minhquan` | User Interface |
 | Phúc Lộc | `phucloc` | Data |
-| Quốc Đạt | `quocdat` | Testing & Documentation |
+| Quốc Đạt | `quocdat` | Testing |
+| Viết Tân | `viettan` | Documentation |
 
 ## Project Structure
 
@@ -32,7 +33,7 @@ assistant-team8/
 ├── data/
 │   └── README.md              # Phúc Lộc
 │
-├── tests/                     # Quốc Đạt
+├── tests/                     # Viết Tân
 │
 └── docs/
     ├── README.md              # Quốc Đạt
@@ -84,6 +85,7 @@ Members should push their work to their own branch. Changes are merged into `mai
 ### Quốc Đạt
 - Testing
 - `tests/`
+### Viết Tân
 - Project documentation
 - `docs/README.md`
 - `docs/team.md`

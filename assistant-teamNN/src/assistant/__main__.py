@@ -1,7 +1,7 @@
 """Run the starter assistant:  python -m assistant "where is the training office?" """
 import sys
 
-from assistant.rules import reply
+from .rules import reply
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -1,5 +1,1 @@
-# Project dependencies
-
-# Add project dependencies here.
-# Example:
-# pytest
+pytest==9.1.1

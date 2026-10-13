@@ -71,7 +71,28 @@ The script checks whether the Python environment is ready for the project.
 
 ## 6. Running the Project
 
-The project entry point and running instructions will be updated when the main assistant functionality is implemented.
+Install the project in editable mode from the project directory:
+
+```bash
+python -m pip install -e .
+```
+
+Start an interactive session:
+
+```bash
+python -m assistant
+```
+
+Or ask a question directly from the command line:
+
+```bash
+python -m assistant help
+python -m assistant "Where is the library?"
+```
+
+The assistant can greet you, explain its capabilities with `help`, and look up
+office locations and opening hours from `data/offices.csv`. Type `quit` or
+`exit` to end an interactive session.
 
 ## 7. Testing
 

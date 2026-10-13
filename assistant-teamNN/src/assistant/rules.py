@@ -1,29 +1,45 @@
-"""A tiny rule-based responder. No AI yet — that comes in Week 4."""
-from __future__ import annotations
-
 import csv
-from pathlib import Path
-
-DATA_DIR = Path(__file__).resolve().parents[2] / "data"
-
-GREETINGS = {"hi", "hello", "hey", "xin chao", "chao"}
 
 
-def load_offices(path: Path = DATA_DIR / "offices.csv") -> dict[str, dict[str, str]]:
-    """Return {office_name_lower: row} from the offices CSV."""
-    with path.open(encoding="utf-8", newline="") as f:
-        return {row["name"].lower(): row for row in csv.DictReader(f)}
+def load_offices(csv_path):
+    offices = {}
+
+    with open(csv_path, "r", encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f)
+
+        for row in reader:
+            name = row["name"].strip()
+            room = row["room"].strip()
+            hours = row["hours"].strip()
+
+            offices[name.lower()] = {
+                "name": name,
+                "room": room,
+                "hours": hours,
+            }
+
+    return offices
 
 
-def reply(message: str, offices: dict[str, dict[str, str]] | None = None) -> str:
-    """Answer a message with simple rules."""
-    text = message.strip().lower().rstrip("?!.")
-    if not text:
+def reply(question, offices=None):
+    question = question.strip()
+
+    if not question:
         return "Please type a question."
-    if text in GREETINGS:
-        return "Hello! Ask me where an office is, or when it opens."
-    offices = offices if offices is not None else load_offices()
-    for name, row in offices.items():
-        if name in text:
-            return f"{row['name']}: room {row['room']}, open {row['hours']}."
-    return "I don't know that yet. Try asking about an office, e.g. 'training office'."
+
+    if offices is None:
+        offices = load_offices("data/offices.csv")
+
+    normalized = question.lower().strip()
+
+    if normalized == "hi" or normalized == "hello":
+        return "Hello!"
+
+    for office_key, office in offices.items():
+        if office_key in normalized:
+            return (
+                f"{office['name']}: "
+                f"room {office['room']}, open {office['hours']}."
+            )
+
+    return "I don't know."

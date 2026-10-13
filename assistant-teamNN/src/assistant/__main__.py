@@ -1,25 +1,27 @@
-"""Run the starter assistant:  python -m assistant "where is the training office?" """
 import sys
 
-from .rules import reply
+from assistant.rules import reply
 
 
-def main(argv: list[str] | None = None) -> int:
-    argv = sys.argv[1:] if argv is None else argv
-    if argv:
-        print(reply(" ".join(argv)))
-        return 0
-    print("Study assistant (starter). Type 'quit' to exit.")
+def main():
+    if len(sys.argv) > 1:
+        print(reply(" ".join(sys.argv[1:])))
+        return
+
+    print("Hello! Ask me where an office is, or when it opens.")
+    print("Type 'quit' to exit.")
+
     while True:
         try:
-            msg = input("> ")
+            question = input("> ")
         except EOFError:
             break
-        if msg.strip().lower() in {"quit", "exit"}:
+
+        if question.strip().lower() == "quit":
             break
-        print(reply(msg))
-    return 0
+
+        print(reply(question))
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()
